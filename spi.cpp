@@ -1,6 +1,7 @@
 /* 
  * File:   spi.cpp
- * Author: andrea_cirigliano
+ * Author: Andrea Cirigliano
+ * Author: Michele Liscio
  * 
  * Created on December 19, 2014, 3:48 PM
  */
@@ -17,13 +18,34 @@ typedef Gpio<GPIOA_BASE,6> MISO;
 typedef Gpio<GPIOA_BASE,7> MOSI;
 typedef Gpio<GPIOE_BASE,3> CS;
 
+/**
+ * \brief class constructor
+ */
 Spi::Spi() {
 }
 
-
+/**
+ * \brief class distructor
+ */
 Spi::~Spi() {
 }
 
+
+/* CS ready */
+void Spi::csOn(){
+    CS::low();
+}
+
+/* CS not ready */
+void Spi::csOff(){
+    CS::high();
+}
+
+/**
+ *  \brief Sets up all the registers to enable the SPI1 interface;
+ *  @param void
+ *  @return void
+ */
 void Spi::config(){
     
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN ; //pheripheral clock enabled
@@ -56,14 +78,4 @@ void Spi::config(){
     /* reset the SPI registers */
     RCC->APB2RSTR |= RCC_APB2ENR_SPI1EN;
     RCC->APB2RSTR &= !(RCC_APB2ENR_SPI1EN);
-}
-
-/* CS ready */
-void Spi::csOn(){
-    CS::low();
-}
-
-/* CS not ready */
-void Spi::csOff(){
-    CS::high();
 }
