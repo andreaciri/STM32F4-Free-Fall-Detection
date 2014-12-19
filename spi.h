@@ -1,7 +1,8 @@
 /* 
  * File:   spi.h
- * Author: es1
- *
+ * Author: Andrea Cirigliano
+ * Author: Michele Liscio
+ * 
  * Created on December 19, 2014, 3:48 PM
  */
 
