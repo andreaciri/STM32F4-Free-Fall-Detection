@@ -3,8 +3,10 @@
 #include <miosix.h>
 #include <unistd.h>
 #include <cstdio>
+#include <spi.h>
 
 using namespace miosix;
+Spi spi;
 
 typedef Gpio<GPIOD_BASE,15> blueLed;
 
@@ -16,14 +18,11 @@ void testLed()
         blueLed::low();
 }
 
-void configureSpi() {
-    
-}
-
 int main()
 {
     blueLed::mode(Mode::OUTPUT);
     
-    //configureSpi();
+    spi.config();
+    
     testLed();
 }
