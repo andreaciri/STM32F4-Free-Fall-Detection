@@ -10,6 +10,7 @@ typedef Gpio<GPIOD_BASE,15> blueLed;
 
 void testLed()
 {
+        // commento prova
         blueLed::high();
         usleep(1000000);  //Blink led
         blueLed::low();
