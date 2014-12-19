@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <code-assistance-data xmlns="http://www.netbeans.org/ns/make-project-private/1">
+        <code-model-enabled>true</code-model-enabled>
+    </code-assistance-data>
+    <data xmlns="http://www.netbeans.org/ns/make-project-private/1">
+        <activeConfTypeElem>0</activeConfTypeElem>
+        <activeConfIndexElem>7</activeConfIndexElem>
+    </data>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/es1/miosix-kernel/led_blink.cpp</file>
+            <file>file:/home/es1/miosix-kernel/miosix/arch/cortexM3_stm32f2/stm32f205rg_sony-newman/interfaces-impl/hwmapping.h</file>
+            <file>file:/home/es1/miosix-kernel/miosix/arch/cortexM3_stm32f2/stm32f205rg_sony-newman/interfaces-impl/bsp.cpp</file>
+        </group>
+    </open-files>
+    <preferences xmlns="http://www.netbeans.org/ns/auxiliary-configuration-preferences/1">
+        <module name="org-netbeans-modules-cnd-discovery">
+            <property name="folder" value="/media/truecrypt1/Projects/ARM/miosix/miosix-kernel"/>
+            <property name="rootFolder" value="/media/truecrypt1/Projects/ARM/miosix/miosix-kernel"/>
+            <property name="make-log-file" value="/media/truecrypt1/Projects/ARM/miosix/miosix-kernel"/>
+            <property name="libraries" value=""/>
+            <property name="executable" value="/media/truecrypt1/Projects/ARM/miosix/miosix-kernel/main.elf*/media/truecrypt1/Projects/ARM/miosix/miosix-kernel"/>
+        </module>
+    </preferences>
+</project-private>
