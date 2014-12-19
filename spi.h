@@ -10,11 +10,13 @@
 
 class Spi {
 public:
-    spi();
-    virtual ~spi();
-    config();
+    Spi();
+    virtual ~Spi();
+    void config();
+    
 private:
-
+    void csOn();
+    void csOff();
 };
 
 #endif	/* SPI_H */

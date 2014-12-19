@@ -14,14 +14,14 @@ typedef Gpio<GPIOA_BASE,6> MISO;
 typedef Gpio<GPIOA_BASE,7> MOSI;
 typedef Gpio<GPIOE_BASE,3> CS;
 
-Spi::spi() {
+Spi::Spi() {
 }
 
 
-Spi::~spi() {
+Spi::~Spi() {
 }
 
-Spi::config(){
+void Spi::config(){
     
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN ; //pheripheral clock enabled
     
