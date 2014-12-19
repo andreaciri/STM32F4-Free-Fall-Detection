@@ -5,9 +5,12 @@
  * Created on December 19, 2014, 3:48 PM
  */
 
-#include <spi.h>
-#include <miosix/miosix.h>
+#include <miosix.h>
+#include <unistd.h>
 #include <cstdio>
+#include <spi.h>
+
+using namespace miosix;
 
 typedef Gpio<GPIOA_BASE,5> SCK;
 typedef Gpio<GPIOA_BASE,6> MISO;
