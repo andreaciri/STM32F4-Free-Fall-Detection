@@ -68,12 +68,15 @@ void Spi::config(){
     //SCK::speed(Speed::_50Mhz) ;
     
     /* SPI protocol configuration */
+    SPI1->CR1 |= SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_BR_2; //set the lowest baud rate (328kHz)
     SPI1->CR1 &= ~SPI_CR1_CPHA ; //sampling on clock rising edge
     SPI1->CR1 &= ~SPI_CR1_CPOL ; //idle clock low
     SPI1->CR1 &= ~SPI_CR1_DFF ; //8-bit frame
     SPI1->CR1 &= ~SPI_CR1_LSBFIRST ; //msb trasmission
     SPI1->CR1 |= SPI_CR1_MSTR ; //master config
     SPI1->CR1 |= SPI_CR1_SPE ; //spi enabled
+    
+    //SPI1->CR2 &= ~SPI_CR2_FRF; set motorola mode instead of 'ti' mode
     
     /* reset the SPI registers */
     RCC->APB2RSTR |= RCC_APB2ENR_SPI1EN;
