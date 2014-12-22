@@ -521,6 +521,8 @@
       <df name="miosix_np_2">
       </df>
       <in>main.cpp</in>
+      <in>spi.cpp</in>
+      <in>spi.h</in>
     </df>
   </logicalFolder>
   <projectmakefile>miosix_np_2-Makefile.mk</projectmakefile>

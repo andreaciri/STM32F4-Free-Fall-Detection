@@ -373,6 +373,7 @@
         <in>miosix.h</in>
       </df>
       <in>main.cpp</in>
+      <in>spi.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -4985,6 +4986,8 @@
             <pElem>../miosix</pElem>
           </incDir>
         </ccTool>
+      </item>
+      <item path="../spi.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <folder path="0/miosix/arch/common/core">
         <ccTool>
