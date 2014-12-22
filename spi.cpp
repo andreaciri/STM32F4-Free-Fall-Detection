@@ -76,7 +76,8 @@ void Spi::config(){
     SPI1->CR1 |= SPI_CR1_MSTR ; //master config
     SPI1->CR1 |= SPI_CR1_SPE ; //spi enabled
     
-    //SPI1->CR2 &= ~SPI_CR2_FRF; set motorola mode instead of 'ti' mode
+    //SPI1->CR2 &= ~SPI_CR2_FRF; //set motorola mode instead of 'ti' mode
+    //SPIg->I2SCFGR &= (uint16_t)!((uint16_t)SPI_I2SCFGR_I2SMOD); //Activate the SPI mode (Reset I2SMOD bit in I2SCFGR register)
     
     /* reset the SPI registers */
     RCC->APB2RSTR |= RCC_APB2ENR_SPI1EN;
