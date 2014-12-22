@@ -14,6 +14,7 @@ public:
     Spi();
     virtual ~Spi();
     void config();
+    uint8_t writeAndRead(uint8_t *dataToSend, int lenght);
     
 private:
     void csOn();

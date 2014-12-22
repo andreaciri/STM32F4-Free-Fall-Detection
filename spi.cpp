@@ -83,3 +83,9 @@ void Spi::config(){
     RCC->APB2RSTR |= RCC_APB2ENR_SPI1EN;
     RCC->APB2RSTR &= !(RCC_APB2ENR_SPI1EN);
 }
+
+uint8_t writeAndRead(uint8_t *dataToSend, int lenght){
+    SPI1->DR = *dataToSend;
+    while((SPI1->SR & SPI_SR_TXE) == 0);
+    
+}
