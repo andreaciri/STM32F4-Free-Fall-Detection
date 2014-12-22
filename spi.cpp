@@ -84,8 +84,27 @@ void Spi::config(){
     RCC->APB2RSTR &= !(RCC_APB2ENR_SPI1EN);
 }
 
-uint8_t writeAndRead(uint8_t *dataToSend, int lenght){
+uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
+    csOn();
+    while(Spi::spiBusy());
     SPI1->DR = *dataToSend;
     while((SPI1->SR & SPI_SR_TXE) == 0);
+    if(lenght>1)
+    {
+        SPI1->DR = *(++dataToSend);
+    }
+    while((SPI1->SR & SPI_SR_RXNE) == 0);
     
+    uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
+    *receivedData = SPI1->DR;
+    csOff();
+    while(Spi::spiBusy());
+    return receivedData;
+    
+    
+}
+
+bool Spi::spiBusy()
+{
+    return (SPI1->SR & SPI_SR_BSY);
 }

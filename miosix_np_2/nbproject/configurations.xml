@@ -372,6 +372,7 @@
         </df>
         <in>miosix.h</in>
       </df>
+      <in>lis3dsh_reg.h</in>
       <in>main.cpp</in>
       <in>spi.cpp</in>
     </df>
@@ -441,6 +442,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/arm7_lpc2000/common/arch_settings.h"
@@ -1173,6 +1176,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/arm7_lpc2000/lpc2138_miosix_board/interfaces-impl/bsp.cpp"
@@ -1699,6 +1704,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F10x/Source/Templates/system_stm32f10x.c"
@@ -2298,6 +2305,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F10x/Source/Templates/system_stm32f10x.c"
@@ -2899,6 +2908,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F10x/Source/Templates/system_stm32f10x.c"
@@ -3350,6 +3361,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F10x/Source/Templates/system_stm32f10x.c"
@@ -3952,6 +3965,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F10x/Source/Templates/system_stm32f10x.c"
@@ -4556,6 +4571,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c"
@@ -5171,6 +5188,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F2xx/Source/Templates/system_stm32f2xx.c"
@@ -5783,6 +5802,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F2xx/Source/Templates/system_stm32f2xx.c"
@@ -6395,6 +6416,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F2xx/Source/Templates/system_stm32f2xx.c"
@@ -6846,6 +6869,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32L1xx/Source/Templates/system_stm32l1xx.c"
@@ -7312,6 +7337,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c"
@@ -7925,6 +7952,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F2xx/Source/Templates/system_stm32f2xx.c"
@@ -8391,6 +8420,8 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../lis3dsh_reg.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../miosix/arch/common/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c"

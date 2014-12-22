@@ -520,6 +520,7 @@
       </df>
       <df name="miosix_np_2">
       </df>
+      <in>lis3dsh_reg.h</in>
       <in>main.cpp</in>
       <in>spi.cpp</in>
       <in>spi.h</in>
