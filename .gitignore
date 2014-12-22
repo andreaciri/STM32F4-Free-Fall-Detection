@@ -13,9 +13,3 @@ main.map
 # Exclude Mac OS X temporary
 ._*
 .DS_Store
-
-# Exclude NetBeans config files
-miosix_np_2/nbproject/configurations.xml
-miosix_np_2/nbproject/private/configurations.xml
-miosix_np_2/nbproject/private/private.xml
-miosix_np_2/nbproject/project.xml
