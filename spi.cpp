@@ -49,7 +49,7 @@ void Spi::csOff(){
 void Spi::config(){
     
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN ; //pheripheral clock enabled
-    RCC->AHB1ENR |=RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOEEN;
+    RCC->AHB1ENR |=RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOEEN; //enable clock on GPIO that will be used
     
     /* pin configuration */
     SCK::mode(Mode::ALTERNATE) ;
