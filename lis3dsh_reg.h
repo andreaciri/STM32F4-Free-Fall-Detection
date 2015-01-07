@@ -1,5 +1,5 @@
 /* 
- * File:   accelerometer.h
+ * File:   lis3dsh_reg.h
  * Author: Andrea Cirigliano
  * Author: Michele Liscio
  *
@@ -35,7 +35,7 @@
 #define CTRL_REG1_ODR3  0x80
 #define REFERENCE (*((volatile uint8_t*)0x26));
 
-typedef struct INT_struct
+struct INT_struct
 {
     volatile uint8_t CFG;
     volatile uint8_t SRC;
