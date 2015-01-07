@@ -34,11 +34,13 @@ Spi::~Spi() {
 /* CS ready */
 void Spi::csOn(){
     CS::low();
+    usleep(1);
 }
 
 /* CS not ready */
 void Spi::csOff(){
     CS::high();
+    usleep(1);
 }
 
 /**
@@ -78,6 +80,8 @@ void Spi::config(){
     SPI1->CR1 &= ~SPI_CR1_CPOL ; //idle clock low
     SPI1->CR1 &= ~SPI_CR1_DFF ; //8-bit frame
     SPI1->CR1 &= ~SPI_CR1_LSBFIRST ; //msb trasmission
+    SPI1->CR1 |= SPI_CR1_SSM ; //software CS management
+    SPI1->CR1 |= SPI_CR1_SSI ; //avoid master mode fault
     SPI1->CR1 |= SPI_CR1_MSTR ; //master config
     SPI1->CR1 |= SPI_CR1_SPE ; //spi enabled
     
@@ -91,18 +95,23 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
     while(Spi::spiBusy());
     while((SPI1->SR & SPI_SR_TXE) == 0);
     csOn();
-    uint16_t temp = *dataToSend;
-    SPI1->DR = temp;
+    uint16_t tempDR = *dataToSend;
+    SPI1->DR = tempDR;
     while((SPI1->SR & SPI_SR_TXE) == 0);
-    if(lenght>1)
+    if(lenght>1) // it is a write
     {
         SPI1->DR = *(++dataToSend);
+    }
+    else // it is a read
+    {
+        SPI1->DR = (uint8_t) 0x0000; //dummy write
     }
     while((SPI1->SR & SPI_SR_RXNE) == 0);
     
     uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
     *receivedData = SPI1->DR;
     csOff();
+    while ((SPI1->SR & SPI_SR_TXE) == 0);
     while(Spi::spiBusy());
     return receivedData;
     

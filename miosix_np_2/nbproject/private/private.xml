@@ -13,7 +13,6 @@
         <group>
             <file>file:/home/es1/miosix-kernel/lis3dsh_reg.h</file>
             <file>file:/home/es1/miosix-kernel/spi.cpp</file>
-            <file>file:/home/es1/miosix-kernel/spi.h</file>
             <file>file:/home/es1/miosix-kernel/main.cpp</file>
         </group>
     </open-files>
