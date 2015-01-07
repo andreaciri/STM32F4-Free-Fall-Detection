@@ -9,6 +9,9 @@ main.map
 *.o
 *.a
 *.d
+miosix_np_2/nbproject/private/private.xml
+.gitignore~
+.gitignore.swp
 
 # Exclude Mac OS X temporary
 ._*
