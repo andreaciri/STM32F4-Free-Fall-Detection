@@ -97,6 +97,11 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
     csOn();
     uint16_t tempDR = *dataToSend;
     SPI1->DR = tempDR;
+
+    while((SPI1->SR & SPI_SR_RXNE) == 0);
+    uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
+    *receivedData = SPI1->DR; //dummy read
+    
     while((SPI1->SR & SPI_SR_TXE) == 0);
     if(lenght>1) // it is a write
     {
@@ -108,7 +113,6 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
     }
     while((SPI1->SR & SPI_SR_RXNE) == 0);
     
-    uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
     *receivedData = SPI1->DR;
     csOff();
     while ((SPI1->SR & SPI_SR_TXE) == 0);
