@@ -92,7 +92,7 @@ void Spi::config(){
 }
 
 uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
-    while(Spi::spiBusy());
+    while(SPI1->SR & SPI_SR_BSY);
     while((SPI1->SR & SPI_SR_TXE) == 0);
     csOn();
     uint8_t tempDR = *dataToSend;
@@ -120,13 +120,8 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
     *receivedData = SPI1->DR;
     csOff();
     while ((SPI1->SR & SPI_SR_TXE) == 0);
-    while(Spi::spiBusy());
+    while(SPI1->SR & SPI_SR_BSY);
     return receivedData;
     
     
-}
-
-bool Spi::spiBusy()
-{
-    return (SPI1->SR & SPI_SR_BSY);
 }

@@ -5,8 +5,8 @@
  * Created on December 22, 2014, 2:20 PM
  */
 
-#ifndef ACCELEROMETER_H
-#define	ACCELEROMETER_H
+#ifndef LIS3DSH_REG_H
+#define LIS3DSH_REG_H
 
 typedef struct CTRL_struct
 {
@@ -40,5 +40,5 @@ typedef struct INT_struct
 
 #define INT ((INT_struct*)0x30);
 
-#endif	/* ACCELEROMETER_H */
+#endif /* LIS3DSH_REG_H */
 
