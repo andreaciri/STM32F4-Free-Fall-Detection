@@ -8,6 +8,7 @@
 
 #ifndef SPI_H
 #define	SPI_H
+#define SPI_READ 1<<7
 
 class Spi {
 public:

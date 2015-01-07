@@ -95,7 +95,11 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, int lenght){
     while(Spi::spiBusy());
     while((SPI1->SR & SPI_SR_TXE) == 0);
     csOn();
-    uint16_t tempDR = *dataToSend;
+    uint8_t tempDR = *dataToSend;
+    if(lenght == 1)
+    {
+        tempDR |= SPI_READ;
+    }
     SPI1->DR = tempDR;
 
     while((SPI1->SR & SPI_SR_RXNE) == 0);
