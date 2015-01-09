@@ -27,10 +27,12 @@ int main()
     spi.config();
     uint8_t toSend[2];
     toSend[0] = (CTRL_REG4);
-    toSend[1] = CTRL_REG1_XEN | CTRL_REG1_YEN | CTRL_REG1_ZEN | CTRL_REG1_ODR0 | CTRL_REG1_ODR1 | CTRL_REG1_ODR2; // writing on CNTRL REG4
+    toSend[1] = CTRL_REG4_XEN | CTRL_REG4_YEN | CTRL_REG4_ZEN ; //accelerometer axis enabled
+    toSend[1] |= CTRL_REG4_ODR0 | CTRL_REG4_ODR1 | CTRL_REG4_ODR2 ; //output data rate at 400 Hz
     spi.writeAndRead(toSend, write);
     toSend[0] = (CTRL_REG3);
-    toSend[1] = (0x48);
+    toSend[1] = CTRL_REG3_INT1EN ; //interrupt1 enabled, signals when data are ready
+    toSend[1] |= CTRL_REG3_IEA ; //interrupt signals active high
     spi.writeAndRead(toSend, write);
     uint8_t toRead = (CTRL_REG4);
     uint8_t *response = spi.writeAndRead(&toRead, read);

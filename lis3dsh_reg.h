@@ -24,16 +24,25 @@
 #define ST1_2       0x41
 #define ST1_3       0x42
 
-// bit mask of CTRL_REG1
-#define CTRL_REG1_XEN   0x01
-#define CTRL_REG1_YEN   0x02
-#define CTRL_REG1_ZEN   0x04
-#define CTRL_REG1_LPEN  0x08
-#define CTRL_REG1_ODR0  0x10
-#define CTRL_REG1_ODR1  0x20
-#define CTRL_REG1_ODR2  0x40
-#define CTRL_REG1_ODR3  0x80
+/* bit mask of CTRL_REG4 */
+#define CTRL_REG4_XEN   0x01
+#define CTRL_REG4_YEN   0x02
+#define CTRL_REG4_ZEN   0x04
+#define CTRL_REG4_BDU   0x08
+#define CTRL_REG4_ODR0  0x10
+#define CTRL_REG4_ODR1  0x20
+#define CTRL_REG4_ODR2  0x40
+#define CTRL_REG4_ODR3  0x80
 #define REFERENCE (*((volatile uint8_t*)0x26));
+
+/* bit mask of CTRL_REG3 */
+#define CTRL_REG3_STRT      0x01
+#define CTRL_REG3_VFILT     0x04
+#define CTRL_REG3_INT1EN    0x08
+#define CTRL_REG3_INT2EN    0x10
+#define CTRL_REG3_IEL       0x20
+#define CTRL_REG3_IEA       0x40
+#define CTRL_REG3_DR_EN     0x80
 
 struct INT_struct
 {
