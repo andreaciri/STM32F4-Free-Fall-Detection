@@ -24,7 +24,7 @@
 #define ST1_2       0x41
 #define ST1_3       0x42
 
-/* bit mask of CTRL_REG4 */
+/* bitmask of CTRL_REG4 */
 #define CTRL_REG4_XEN   0x01
 #define CTRL_REG4_YEN   0x02
 #define CTRL_REG4_ZEN   0x04
@@ -35,7 +35,14 @@
 #define CTRL_REG4_ODR3  0x80
 #define REFERENCE (*((volatile uint8_t*)0x26));
 
-/* bit mask of CTRL_REG3 */
+/* bitmask of CTRL_REG1 */
+#define CTRL_REG1_SM1_EN    0x01
+#define CTRL_REG1_SM1_PIN   0x08
+#define CTRL_REG1_HYST0_1   0x20
+#define CTRL_REG1_HYST1_1   0x40
+#define CTRL_REG1_HYST2_1   0x80
+
+/* bitmask of CTRL_REG3 */
 #define CTRL_REG3_STRT      0x01
 #define CTRL_REG3_VFILT     0x04
 #define CTRL_REG3_INT1EN    0x08
@@ -43,6 +50,34 @@
 #define CTRL_REG3_IEL       0x20
 #define CTRL_REG3_IEA       0x40
 #define CTRL_REG3_DR_EN     0x80
+
+/* bitmask of MASK1_A */
+#define MASK1_A_N_V         0x01
+#define MASK1_A_P_V         0x02
+#define MASK1_A_N_Z         0x04
+#define MASK1_A_P_Z         0x08
+#define MASK1_A_N_Y         0x10
+#define MASK1_A_P_Y         0x20
+#define MASK1_A_N_X         0x40
+#define MASK1_A_P_X         0x80
+
+/* bitmask of MASK1_B */
+#define MASK1_B_N_V         0x01
+#define MASK1_B_P_V         0x02
+#define MASK1_B_N_Z         0x04
+#define MASK1_B_P_Z         0x08
+#define MASK1_B_N_Y         0x10
+#define MASK1_B_P_Y         0x20
+#define MASK1_B_N_X         0x40
+#define MASK1_B_P_X         0x80
+
+/* bitmask of SETT1 */
+#define SETT1_SITR          0x01
+#define SETT1_R_TAM         0x02
+#define SETT1_THR3_MA       0x04
+#define SETT1_ABS           0x20
+#define SETT1_THR3_SA       0x40
+#define SETT1_P_DET         0x80
 
 struct INT_struct
 {
