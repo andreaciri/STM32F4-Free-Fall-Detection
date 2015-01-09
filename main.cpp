@@ -9,19 +9,24 @@
 using namespace miosix;
 Spi spi;
 
+/* Leds utility */
 typedef Gpio<GPIOD_BASE,15> blueLed;
+typedef Gpio<GPIOD_BASE,14> redLed;
+typedef Gpio<GPIOD_BASE,13> orangeLed;
+typedef Gpio<GPIOD_BASE,12> greenLed;
 
-void testLed()
+void blinkLeds()
 {
-        // commento prova
-        blueLed::high();
-        usleep(1000000);  //Blink led
-        blueLed::low();
+    blueLed::high(); redLed::high(); orangeLed::high(); greenLed::high();
+    usleep(1000000);
+    blueLed::low(); redLed::low(); orangeLed::low(); greenLed::low();
+    usleep(1000000);
 }
 
 int main()
 {
-    blueLed::mode(Mode::OUTPUT);
+    blueLed::mode(Mode::OUTPUT); redLed::mode(Mode::OUTPUT);
+    orangeLed::mode(Mode::OUTPUT); greenLed::mode(Mode::OUTPUT);
     bool write = true, read = false;
     
     spi.config();
@@ -38,5 +43,6 @@ int main()
     uint8_t *response = spi.writeAndRead(&toRead, read);
     uint8_t tempResponse = (uint8_t)*response;
     
-    testLed();
+    for(;;)
+        blinkLeds();
 }
