@@ -92,5 +92,13 @@ int main()
     uint8_t tempResponse = (uint8_t)*response;
     
     for(;;)
+    {
+        toRead = (0x18);
+        do
+        {
+            response = spi.writeAndRead(&toRead, read);
+            tempResponse = (uint8_t)*response;
+        } while ((tempResponse & (1<<3)) ==0);
         blinkLeds();
+    }
 }
