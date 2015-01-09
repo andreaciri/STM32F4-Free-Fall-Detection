@@ -38,8 +38,8 @@ int main()
     spi.writeAndRead(toSend, write);
     
     toSend[0] = CTRL_REG3;
-    toSend[1] = CTRL_REG3_INT1EN ; //interrupt1 enabled, signals when data are ready
-    toSend[1] |= CTRL_REG3_IEA ; //interrupt signals active high
+    toSend[1] = CTRL_REG3_INT1EN ; //interrupt1 enabled, signals when freefall is detected
+    toSend[1] |= CTRL_REG3_IEA ; //interrupt signal active high
     spi.writeAndRead(toSend, write);
     
     toSend[0] = TIM1_1L; //timer 1
