@@ -91,6 +91,12 @@ void Spi::config(){
 
 }
 
+/**
+ *  \brief performs a write or a read depending on the boolean parameter
+ *  @param dataToSend : dataToSend[0] contains the address where to write or where to read,
+ *                      dataToSend[1] contains the data to write or it's empty if it's a read.
+ *  @return the address where to read the data; if it's a write we ignore it.
+ */
 uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     while(SPI1->SR & SPI_SR_BSY);
     while((SPI1->SR & SPI_SR_TXE) == 0);
@@ -122,6 +128,4 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     while ((SPI1->SR & SPI_SR_TXE) == 0);
     while(SPI1->SR & SPI_SR_BSY);
     return receivedData;
-    
-    
 }
