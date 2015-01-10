@@ -9,6 +9,8 @@
 #ifndef SPI_H
 #define	SPI_H
 #define SPI_READ 1<<7
+#define ADDR 0
+#define DATA 1
 
 class Spi {
 public:
