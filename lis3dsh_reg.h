@@ -15,7 +15,7 @@
 #define CTRL_REG3   0x23
 #define CTRL_REG5   0x24
 #define CTRL_REG6   0x25
-#define TIM1_1L     0x55
+#define TIM1_1L     0x54
 #define THRS2_1     0x56
 #define MASK1_A     0x5A
 #define MASK1_B     0x59
