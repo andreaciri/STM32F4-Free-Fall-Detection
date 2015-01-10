@@ -7,15 +7,18 @@
 
 using namespace miosix;
 
+#define MIN_DURATION    100
+#define THRESHOLD       375
+
 Lis3dsh accelerometer;
     
 /* for the integrability, we decided to define the purpose for which the accelerometer
  is intended for in our project; other possible purposes are for instance the position recognition,
  the double-turn rilevation or the double-tap rilevation, not implemented here.*/
-const char purpose[] = "freefall";
+//const char purpose[] = "freefall";
 
 int main()
-{       
-    accelerometer.config(purpose);
+{
+    accelerometer.freeFallConfig(MIN_DURATION, THRESHOLD);
 
 }

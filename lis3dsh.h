@@ -15,7 +15,7 @@ public:
     Lis3dsh();
     virtual ~Lis3dsh();
     
-    void config(const char* purpose);
+    void freeFallConfig(int minDuration, int threshold);
     
 private:
     void blinkLeds();

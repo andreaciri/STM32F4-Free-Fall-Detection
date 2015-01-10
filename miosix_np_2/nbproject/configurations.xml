@@ -378,6 +378,15 @@
       <in>main.cpp</in>
       <in>spi.cpp</in>
     </df>
+    <df root=".." name="1">
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   root="..">
+      <itemPath>../makefile</itemPath>
+      <itemPath>miosix_np_2-Makefile.mk</itemPath>
+    </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
@@ -388,6 +397,7 @@
   </logicalFolder>
   <sourceFolderFilter>^(nbproject|build|_doc|_examples|_tools)$</sourceFolderFilter>
   <sourceRootList>
+    <Elem>..</Elem>
     <Elem>..</Elem>
   </sourceRootList>
   <projectmakefile>miosix_np_2-Makefile.mk</projectmakefile>
