@@ -3,13 +3,15 @@
  * Author: Andrea Cirigliano
  * Author: Michele Liscio
  * 
+ * brief : this class configures the spi.
+ * 
  * Created on December 19, 2014, 3:48 PM
  */
 
 #include <miosix.h>
 #include <unistd.h>
 #include <cstdio>
-#include <spi.h>
+#include "spi.h"
 
 using namespace miosix;
 
@@ -88,7 +90,6 @@ void Spi::config(){
     //SPI1->CR2 &= ~SPI_CR2_FRF; //set motorola mode instead of 'ti' mode
     //SPIg->I2SCFGR &= (uint16_t)!((uint16_t)SPI_I2SCFGR_I2SMOD); //Activate the SPI mode (Reset I2SMOD bit in I2SCFGR register)
     
-
 }
 
 /**

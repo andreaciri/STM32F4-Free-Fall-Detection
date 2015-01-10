@@ -17,7 +17,7 @@ SUBDIRS := $(KPATH)
 ## List here your source files (both .s, .c and .cpp)
 ##
 SRC :=			    \
-	main.cpp spi.cpp
+	main.cpp spi.cpp lis3dsh.cpp
 
 ##
 ## List here additional static libraries with relative path
