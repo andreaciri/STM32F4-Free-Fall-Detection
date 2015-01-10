@@ -15,10 +15,12 @@ public:
     Lis3dsh();
     virtual ~Lis3dsh();
     
-    void freeFallConfig(int minDuration, int threshold);
+    void freeFallConfig(float minDuration, float threshold);
     
 private:
     void blinkLeds();
+    uint8_t convertTime(float milliseconds);
+    uint8_t convertThreshold(float milliG);
 };
 
 #endif	/* LIS3DSH_H */

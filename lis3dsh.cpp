@@ -57,17 +57,21 @@ void Lis3dsh::blinkLeds() {
 /* ============================ END LEDS UTILITY =============================*/
 
 /**
- * \brief configures the accelerometer for the free-fall detection.
- * @param minDuration : The minimum duration in milliseconds for recognize a free-fall condition.
- * @param threshold : The maximum acceleration in milli-g that is recognized as free-fall acceleration.
- *                    The lower is the threshold, more accurate is the recognition.
+ * \brief Configures the accelerometer for the free-fall detection.
+ * @param minDuration : The minimum duration (in milliseconds) of subthreshold accelerations for recognize a free-fall condition.
+ *                      Allowed range [2,5 - 637,5]ms.
+ * @param threshold :   The maximum acceleration (in milli-g) that is recognized as free-fall condition.
+ *                      The lower is the threshold, more accurate is the recognition.
+ *                      Allowed range [15,625 - 3984]mg.
  */
-void Lis3dsh::freeFallConfig(int minDuration, int threshold) {
+void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     bool write = true, read = false;
 
     spi.config();
-
-
+    
+    uint8_t timer1 = convertTime(minDuration);
+    uint8_t threshold2 = convertThreshold(threshold);
+    
     uint8_t toSend[2];
     uint8_t toRead[1];
 
@@ -81,12 +85,12 @@ void Lis3dsh::freeFallConfig(int minDuration, int threshold) {
     toSend[DATA] |= CTRL_REG3_IEA; //interrupt signal active high
     spi.writeAndRead(toSend, write);
 
-    toSend[ADDR] = TIM1_1L; //timer 1
-    toSend[DATA] = 0x28; //free fall duration 100 ms
+    toSend[ADDR] = TIM1_1L; //timer 1 for State Machine 1
+    toSend[DATA] = timer1; //free fall duration
     spi.writeAndRead(toSend, write);
 
-    toSend[ADDR] = THRS2_1;
-    toSend[DATA] = 0x18; //free-fall threshold 375 mg (threshold 2)
+    toSend[ADDR] = THRS2_1; // threshold 2 for State Machine 1
+    toSend[DATA] = threshold2; //free-fall threshold
     spi.writeAndRead(toSend, write);
 
     toSend[ADDR] = MASK1_B;
@@ -138,5 +142,27 @@ void Lis3dsh::freeFallConfig(int minDuration, int threshold) {
         } while ((tempResponse & (1 << 3)) == 0);
         blinkLeds();
     }
+    
+}
 
+// converts time from milliseconds to the corresponding byte
+uint8_t Lis3dsh::convertTime(float milliseconds){
+    // 1 LSB = 1/ODR = 1/400 Hz
+    float temp = milliseconds / (2.5);
+    int byte = (int) temp;
+    if (byte < 0 || byte > 255)
+        return 255;
+    else
+        return (uint8_t) byte;
+}
+
+// converts acceleration from milli-g to the corresponding byte
+uint8_t Lis3dsh::convertThreshold(float milliG){
+    // 1 LSB = 2g/(2^7)
+    float temp = milliG / (15.625);
+    int byte = (int) temp;
+    if (byte < 0 || byte > 255)
+        return 0;
+    else
+        return (uint8_t) byte;
 }
