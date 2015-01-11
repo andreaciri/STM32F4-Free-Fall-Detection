@@ -34,6 +34,7 @@ typedef Gpio<GPIOD_BASE, 15> blueLed;
 typedef Gpio<GPIOD_BASE, 14> redLed;
 typedef Gpio<GPIOD_BASE, 13> orangeLed;
 typedef Gpio<GPIOD_BASE, 12> greenLed;
+typedef Gpio<GPIOE_BASE, 0> int1Signal;
 
 void Lis3dsh::blinkLeds() {
     blueLed::mode(Mode::OUTPUT);
@@ -130,17 +131,17 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     spi.writeAndRead(toSend, write);
     /*====================== END OF STATE MACHINE CONFIG =====================*/
 
-    toRead[ADDR] = (CTRL_REG1);
-    uint8_t *response = spi.writeAndRead(toRead, read);
-    uint8_t tempResponse = (uint8_t) * response;
 
     for (;;) {
-        toRead[ADDR] = (0x18);
-        do {
-            response = spi.writeAndRead(toRead, read);
-            tempResponse = (uint8_t) * response;
-        } while ((tempResponse & (1 << 3)) == 0);
+        
+        while(int1Signal::value() == 0); // polling on the INT1 signal
+        
         blinkLeds();
+        
+        toRead[ADDR] = (0x5F); // OUTS1 register: reading this, the interrupt signal is reset 
+        uint8_t *response = spi.writeAndRead(toRead, read);
+        uint8_t tempResponse = (uint8_t) * response;
+        
     }
     
 }
