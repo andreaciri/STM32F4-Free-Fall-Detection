@@ -16,6 +16,7 @@
 #include "spi.h"
 #include "lis3dsh_reg.h"
 #include "lis3dsh.h"
+#include "IRQhandler.h"
 
 using namespace miosix;
 
@@ -24,6 +25,7 @@ typedef Gpio<GPIOE_BASE, 0> int1Signal;
 /* SPI istance here defined because of integrability (someone interested in the
  freefall detection doesn't have to call the spi.config but only the accelerometer.config */
 Spi spi;
+IRQhandler irqHandler;
 
 Lis3dsh::Lis3dsh() {
 }
@@ -66,6 +68,7 @@ void Lis3dsh::blinkLeds() {
  */
 void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     bool write = true, read = false;
+    int1Signal::mode(Mode::INPUT);
 
     spi.config();
     
@@ -130,10 +133,13 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     spi.writeAndRead(toSend, write);
     /*====================== END OF STATE MACHINE CONFIG =====================*/
 
+    irqHandler.configureAccInterrupt(); //configure interrupt 1 handler
 
     for (;;) {
         
-        while(int1Signal::value() == 0); // polling on the INT1 signal
+//        while(int1Signal::value() == 0); // polling on the INT1 signal
+        
+        irqHandler.waitForInt1();
         
         blinkLeds();
         

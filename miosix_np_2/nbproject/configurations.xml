@@ -372,6 +372,8 @@
         </df>
         <in>miosix.h</in>
       </df>
+      <in>IRQhandler.cpp</in>
+      <in>IRQhandler.h</in>
       <in>lis3dsh.cpp</in>
       <in>lis3dsh.h</in>
       <in>lis3dsh_reg.h</in>
@@ -454,6 +456,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -1192,6 +1198,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -1724,6 +1734,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -2329,6 +2343,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -2936,6 +2954,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -3393,6 +3415,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -4001,6 +4027,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -4611,6 +4641,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -5232,6 +5266,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -5850,6 +5888,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -6468,6 +6510,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -6925,6 +6971,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -7397,6 +7447,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -8016,6 +8070,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">
@@ -8488,6 +8546,10 @@
           </ccTool>
         </makeTool>
       </makefileType>
+      <item path="../IRQhandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="../IRQhandler.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="../lis3dsh.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="../lis3dsh.h" ex="false" tool="3" flavor2="0">

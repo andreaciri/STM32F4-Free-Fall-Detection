@@ -18,6 +18,7 @@ Lis3dsh accelerometer;
 
 int main()
 {
+    
     accelerometer.freeFallConfig(MIN_DURATION, THRESHOLD);
 
 }
