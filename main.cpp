@@ -7,8 +7,8 @@
 
 using namespace miosix;
 
-#define MIN_DURATION    60
-#define THRESHOLD       600
+#define MIN_DURATION    100
+#define THRESHOLD       300
 
 Lis3dsh accelerometer;
     

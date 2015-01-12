@@ -19,6 +19,8 @@
 
 using namespace miosix;
 
+typedef Gpio<GPIOE_BASE, 0> int1Signal;
+
 /* SPI istance here defined because of integrability (someone interested in the
  freefall detection doesn't have to call the spi.config but only the accelerometer.config */
 Spi spi;
@@ -34,7 +36,6 @@ typedef Gpio<GPIOD_BASE, 15> blueLed;
 typedef Gpio<GPIOD_BASE, 14> redLed;
 typedef Gpio<GPIOD_BASE, 13> orangeLed;
 typedef Gpio<GPIOD_BASE, 12> greenLed;
-typedef Gpio<GPIOE_BASE, 0> int1Signal;
 
 void Lis3dsh::blinkLeds() {
     blueLed::mode(Mode::OUTPUT);
@@ -42,18 +43,16 @@ void Lis3dsh::blinkLeds() {
     orangeLed::mode(Mode::OUTPUT);
     greenLed::mode(Mode::OUTPUT);
 
-    for (;;) {
-        blueLed::high();
-        redLed::high();
-        orangeLed::high();
-        greenLed::high();
-        usleep(1000000);
-        blueLed::low();
-        redLed::low();
-        orangeLed::low();
-        greenLed::low();
-        usleep(1000000);
-    }
+    blueLed::high();
+    redLed::high();
+    orangeLed::high();
+    greenLed::high();
+    usleep(1000000);
+    blueLed::low();
+    redLed::low();
+    orangeLed::low();
+    greenLed::low();
+    usleep(1000000);
 }
 /* ============================ END LEDS UTILITY =============================*/
 
