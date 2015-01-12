@@ -68,6 +68,7 @@ void Lis3dsh::blinkLeds() {
  */
 void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     bool write = true, read = false;
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; //enable GPIOE clock
     int1Signal::mode(Mode::INPUT);
 
     spi.config();

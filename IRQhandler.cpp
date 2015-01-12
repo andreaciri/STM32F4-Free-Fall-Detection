@@ -43,8 +43,8 @@ void __attribute__((used)) EXTI0HandlerImpl()
 
 void IRQhandler::configureAccInterrupt()
 {
-    //create interrupt on rising edge of the accelerometer interrupt
-    int1Signal::mode(Mode::INPUT);
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; //enable GPIOE clock
+    int1Signal::mode(Mode::INPUT); //create interrupt on rising edge of the accelerometer interrupt
     RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; // system configuration controller clock enable
     SYSCFG->EXTICR[0] = SYSCFG_EXTICR1_EXTI0_PE; //use PE0 for EXTI_Line0
     EXTI->IMR |= EXTI_IMR_MR0; //interrupt request from line 0 is not masked
