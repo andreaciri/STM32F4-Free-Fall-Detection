@@ -137,8 +137,6 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
 
     for (;;) {
         
-//        while(int1Signal::value() == 0); // polling on the INT1 signal
-        
         irqHandler.waitForInt1();
         
         blinkLeds();
