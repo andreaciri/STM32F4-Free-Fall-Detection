@@ -145,7 +145,7 @@ void Lis3dsh::freeFallDetectionInit() {
         
         blinkLeds();
         
-        toReceive[ADDR] = (0x5F); // OUTS1 register: reading this, the interrupt signal is reset 
+        toReceive[ADDR] = OUTS1; // OUTS1 register: reading this, the interrupt signal is reset 
         spi.writeAndRead(toReceive, read);
         
     }

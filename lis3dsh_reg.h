@@ -23,6 +23,7 @@
 #define ST1_1       0x40
 #define ST1_2       0x41
 #define ST1_3       0x42
+#define OUTS1       0x5F
 
 /* bitmask of CTRL_REG4 */
 #define CTRL_REG4_XEN   0x01
@@ -80,7 +81,7 @@
 #define SETT1_P_DET         0x80
 
 /* bit mask for state machine operation codes */
-#define NEXT                <<0
+#define NEXT                <<0 //don't surround with parenthesis!
 #define RESET               <<4
 #define NOP                 0x0
 #define LLTH2               0xA
