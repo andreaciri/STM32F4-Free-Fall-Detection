@@ -1,6 +1,7 @@
 /* 
  * File:   IRQhandler.cpp
- * Author: es1
+ * Author: Michele Liscio
+ * Author: Andrea Cirigliano
  * 
  * Created on January 12, 2015, 2:38 PM
  */
@@ -17,7 +18,6 @@ static Thread *waiting=0;
 
 IRQhandler::IRQhandler() {
 }
-
 
 IRQhandler::~IRQhandler() {
 }
@@ -37,10 +37,13 @@ void __attribute__((used)) EXTI0HandlerImpl()
     if(waiting==0) return;
     waiting->IRQwakeup();
     if(waiting->IRQgetPriority()>Thread::IRQgetCurrentThread()->IRQgetPriority())
-		Scheduler::IRQfindNextThread();
+        Scheduler::IRQfindNextThread();
     waiting=0;
 }
 
+/**
+ *  @brief configures the interrupt in line 0 for the accelerometer;
+ */
 void IRQhandler::configureAccInterrupt()
 {
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; //enable GPIOE clock
@@ -56,6 +59,9 @@ void IRQhandler::configureAccInterrupt()
     NVIC_SetPriority(EXTI0_IRQn,15); //low priority
 }
 
+/**
+ *  @brief puts the current thread in wait condition until the interrupt is received;
+ */
 void IRQhandler::waitForInt1()
 {
     FastInterruptDisableLock dLock;

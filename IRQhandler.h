@@ -1,6 +1,7 @@
 /* 
  * File:   IRQhandler.h
- * Author: es1
+ * Author: Michele Liscio
+ * Author : Andrea Cirigliano
  *
  * Created on January 12, 2015, 2:38 PM
  */
@@ -12,6 +13,7 @@ class IRQhandler {
 public:
     IRQhandler();
     virtual ~IRQhandler();
+    
     void configureAccInterrupt();
     void waitForInt1();
 private:
