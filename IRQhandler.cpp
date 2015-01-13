@@ -1,6 +1,7 @@
 /* 
  * File:   IRQhandler.cpp
- * Author: es1
+ * Author: Michele Liscio
+ * Author: Andrea Cirigliano
  * 
  * Created on January 12, 2015, 2:38 PM
  */
@@ -17,7 +18,6 @@ static Thread *waiting=0;
 
 IRQhandler::IRQhandler() {
 }
-
 
 IRQhandler::~IRQhandler() {
 }
@@ -37,14 +37,17 @@ void __attribute__((used)) EXTI0HandlerImpl()
     if(waiting==0) return;
     waiting->IRQwakeup();
     if(waiting->IRQgetPriority()>Thread::IRQgetCurrentThread()->IRQgetPriority())
-		Scheduler::IRQfindNextThread();
+        Scheduler::IRQfindNextThread();
     waiting=0;
 }
 
+/**
+ *  @brief configures the interrupt in line 0 for the accelerometer;
+ */
 void IRQhandler::configureAccInterrupt()
 {
-    //create interrupt on rising edge of the accelerometer interrupt
-    int1Signal::mode(Mode::INPUT);
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; //enable GPIOE clock
+    int1Signal::mode(Mode::INPUT); //create interrupt on rising edge of the accelerometer interrupt
     RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN; // system configuration controller clock enable
     SYSCFG->EXTICR[0] = SYSCFG_EXTICR1_EXTI0_PE; //use PE0 for EXTI_Line0
     EXTI->IMR |= EXTI_IMR_MR0; //interrupt request from line 0 is not masked
@@ -56,6 +59,9 @@ void IRQhandler::configureAccInterrupt()
     NVIC_SetPriority(EXTI0_IRQn,15); //low priority
 }
 
+/**
+ *  @brief puts the current thread in wait condition until the interrupt is received;
+ */
 void IRQhandler::waitForInt1()
 {
     FastInterruptDisableLock dLock;

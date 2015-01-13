@@ -3,14 +3,12 @@
  * Author: Andrea Cirigliano
  * Author: Michele Liscio
  * 
- * brief : this class configures the spi.
+ * @brief : this class configures the spi.
  * 
  * Created on December 19, 2014, 3:48 PM
  */
 
 #include <miosix.h>
-#include <unistd.h>
-#include <cstdio>
 #include "spi.h"
 
 using namespace miosix;
@@ -20,15 +18,9 @@ typedef Gpio<GPIOA_BASE,6> MISO;
 typedef Gpio<GPIOA_BASE,7> MOSI;
 typedef Gpio<GPIOE_BASE,3> CS;
 
-/**
- * \brief class constructor
- */
 Spi::Spi() {
 }
 
-/**
- * \brief class distructor
- */
 Spi::~Spi() {
 }
 
@@ -46,35 +38,32 @@ void Spi::csOff(){
 }
 
 /**
- *  \brief Sets up all the registers to enable the SPI1 interface;
+ *  @brief Sets up all the registers to enable the SPI1 interface;
  *  @param void
  *  @return void
  */
 void Spi::config(){
     
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN ; //pheripheral clock enabled
-    RCC->AHB1ENR |=RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOEEN; //enable clock on GPIO that will be used
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOEEN; //enable clock on GPIO that will be used
     
-    /* pin configuration */
+    /* ======================= PIN CONFIGURATION ============================ */
     SCK::mode(Mode::ALTERNATE) ;
     SCK::alternateFunction(5) ;
-    //SCK::speed(Speed::_50Mhz) ;
     
     MISO::mode(Mode::ALTERNATE) ;
     MISO::alternateFunction(5) ;
-    //SCK::speed(Speed::_50Mhz) ;
     
     MOSI::mode(Mode::ALTERNATE) ;
     MOSI::alternateFunction(5) ;
-    //SCK::speed(Speed::_50Mhz) ;
     
     CS::mode(Mode::OUTPUT) ;
     csOff();
-    //SCK::speed(Speed::_50Mhz) ;
+    /* ======================= END PIN CONFIGURATION =========================*/
     
-        /* reset the SPI registers */
-    RCC->APB2RSTR |= RCC_APB2ENR_SPI1EN;
-    RCC->APB2RSTR &= !(RCC_APB2ENR_SPI1EN);
+    /* reset the SPI registers */
+    RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST; 
+    RCC->APB2RSTR &= !(RCC_APB2RSTR_SPI1RST);
     
     /* SPI protocol configuration */
     SPI1->CR1 |= SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_BR_2; //set the lowest baud rate (328kHz)
@@ -84,24 +73,23 @@ void Spi::config(){
     SPI1->CR1 &= ~SPI_CR1_LSBFIRST ; //msb trasmission
     SPI1->CR1 |= SPI_CR1_SSM ; //software CS management
     SPI1->CR1 |= SPI_CR1_SSI ; //avoid master mode fault
+    SPI1->CR2 &= ~SPI_CR2_FRF ; //select the motorola protocol instead of TI
     SPI1->CR1 |= SPI_CR1_MSTR ; //master config
     SPI1->CR1 |= SPI_CR1_SPE ; //spi enabled
-    
-    //SPI1->CR2 &= ~SPI_CR2_FRF; //set motorola mode instead of 'ti' mode
-    //SPIg->I2SCFGR &= (uint16_t)!((uint16_t)SPI_I2SCFGR_I2SMOD); //Activate the SPI mode (Reset I2SMOD bit in I2SCFGR register)
-    
 }
 
 /**
- *  \brief performs a write or a read depending on the boolean parameter
+ *  @brief performs a write or a read depending on the boolean parameter
  *  @param dataToSend : dataToSend[0] contains the address where to write or where to read,
  *                      dataToSend[1] contains the data to write or it's empty if it's a read.
  *  @return the address where to read the data; if it's a write we ignore it.
  */
 uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
-    while(SPI1->SR & SPI_SR_BSY);
-    while((SPI1->SR & SPI_SR_TXE) == 0);
-    csOn();
+    while(SPI1->SR & SPI_SR_BSY){};
+    
+    while((SPI1->SR & SPI_SR_TXE) == 0){};
+    
+    csOn(); //start transmission
     uint8_t tempDR = dataToSend[ADDR];
     if(!write) // it's a read
     {
@@ -109,24 +97,31 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     }
     SPI1->DR = tempDR;
 
-    while((SPI1->SR & SPI_SR_RXNE) == 0);
+    while((SPI1->SR & SPI_SR_RXNE) == 0){};
+    
     uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
     *receivedData = SPI1->DR; //dummy read
     
-    while((SPI1->SR & SPI_SR_TXE) == 0);
-    if(write) // it is a write
+    while((SPI1->SR & SPI_SR_TXE) == 0){};
+    
+    if(write) //it is a write
     {
         SPI1->DR = dataToSend[DATA];
     }
-    else // it is a read
+    else //it is a read
     {
         SPI1->DR = (uint8_t) 0x0000; //dummy write
     }
-    while((SPI1->SR & SPI_SR_RXNE) == 0);
+    
+    while((SPI1->SR & SPI_SR_RXNE) == 0){};
     
     *receivedData = SPI1->DR;
-    csOff();
-    while ((SPI1->SR & SPI_SR_TXE) == 0);
-    while(SPI1->SR & SPI_SR_BSY);
+    
+    while ((SPI1->SR & SPI_SR_TXE) == 0){};
+    
+    while(SPI1->SR & SPI_SR_BSY){};
+    
+    csOff(); //end transmission
+    
     return receivedData;
 }
