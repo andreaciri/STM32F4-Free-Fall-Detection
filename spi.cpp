@@ -45,7 +45,7 @@ void Spi::csOff(){
 void Spi::config(){
     
     RCC->APB2ENR |= RCC_APB2ENR_SPI1EN ; //pheripheral clock enabled
-    RCC->AHB1ENR |=RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOEEN; //enable clock on GPIO that will be used
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN | RCC_AHB1ENR_GPIOEEN; //enable clock on GPIO that will be used
     
     /* ======================= PIN CONFIGURATION ============================ */
     SCK::mode(Mode::ALTERNATE) ;
@@ -61,7 +61,9 @@ void Spi::config(){
     csOff();
     /* ======================= END PIN CONFIGURATION =========================*/
     
-    RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST; //reset the SPI registers
+    /* reset the SPI registers */
+    RCC->APB2RSTR |= RCC_APB2RSTR_SPI1RST; 
+    RCC->APB2RSTR &= !(RCC_APB2RSTR_SPI1RST);
     
     /* SPI protocol configuration */
     SPI1->CR1 |= SPI_CR1_BR_0 | SPI_CR1_BR_1 | SPI_CR1_BR_2; //set the lowest baud rate (328kHz)
@@ -71,9 +73,9 @@ void Spi::config(){
     SPI1->CR1 &= ~SPI_CR1_LSBFIRST ; //msb trasmission
     SPI1->CR1 |= SPI_CR1_SSM ; //software CS management
     SPI1->CR1 |= SPI_CR1_SSI ; //avoid master mode fault
+    SPI1->CR2 &= ~SPI_CR2_FRF ; //select the motorola protocol instead of TI
     SPI1->CR1 |= SPI_CR1_MSTR ; //master config
     SPI1->CR1 |= SPI_CR1_SPE ; //spi enabled
-        
 }
 
 /**
@@ -83,9 +85,11 @@ void Spi::config(){
  *  @return the address where to read the data; if it's a write we ignore it.
  */
 uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
-    while(SPI1->SR & SPI_SR_BSY);
-    while((SPI1->SR & SPI_SR_TXE) == 0);
-    csOn();
+    while(SPI1->SR & SPI_SR_BSY){};
+    
+    while((SPI1->SR & SPI_SR_TXE) == 0){};
+    
+    csOn(); //start transmission
     uint8_t tempDR = dataToSend[ADDR];
     if(!write) // it's a read
     {
@@ -93,12 +97,14 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     }
     SPI1->DR = tempDR;
 
-    while((SPI1->SR & SPI_SR_RXNE) == 0);
+    while((SPI1->SR & SPI_SR_RXNE) == 0){};
+    
     uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
     *receivedData = SPI1->DR; //dummy read
     
-    while((SPI1->SR & SPI_SR_TXE) == 0);
-    if(write) // it is a write
+    while((SPI1->SR & SPI_SR_TXE) == 0){};
+    
+    if(write) //it is a write
     {
         SPI1->DR = dataToSend[DATA];
     }
@@ -106,11 +112,16 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     {
         SPI1->DR = (uint8_t) 0x0000; //dummy write
     }
-    while((SPI1->SR & SPI_SR_RXNE) == 0);
+    
+    while((SPI1->SR & SPI_SR_RXNE) == 0){};
     
     *receivedData = SPI1->DR;
-    csOff();
-    while ((SPI1->SR & SPI_SR_TXE) == 0);
-    while(SPI1->SR & SPI_SR_BSY);
+    
+    while ((SPI1->SR & SPI_SR_TXE) == 0){};
+    
+    while(SPI1->SR & SPI_SR_BSY){};
+    
+    csOff(); //end transmission
+    
     return receivedData;
 }
