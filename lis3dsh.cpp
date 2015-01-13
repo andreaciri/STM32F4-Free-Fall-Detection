@@ -10,9 +10,6 @@
  */
 
 #include <miosix.h>
-#include <unistd.h>
-#include <string>
-#include <cstdio>
 #include "spi.h"
 #include "lis3dsh_reg.h"
 #include "lis3dsh.h"
@@ -134,8 +131,8 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
 void Lis3dsh::freeFallDetectionInit() {
     uint8_t toReceive[1];
     bool read = false;
-    for (;;) {
-        
+    for (;;) 
+    {        
         irqHandler.waitForInt1();
         
         blinkLeds();
