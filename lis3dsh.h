@@ -16,6 +16,7 @@ public:
     virtual ~Lis3dsh();
     
     void freeFallConfig(float minDuration, float threshold);
+    void freeFallDetectionInit();
     
 private:
     void blinkLeds();

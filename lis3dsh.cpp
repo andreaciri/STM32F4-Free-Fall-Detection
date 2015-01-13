@@ -67,7 +67,7 @@ void Lis3dsh::blinkLeds() {
  *                      Allowed range [15,625 - 3984]mg.
  */
 void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
-    bool write = true, read = false;
+    bool write = true;
     int1Signal::mode(Mode::INPUT);
 
     spi.config();
@@ -76,7 +76,6 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     uint8_t threshold2 = convertThreshold(threshold);
     
     uint8_t toSend[2];
-    uint8_t toRead[1];
 
     toSend[ADDR] = CTRL_REG4;
     toSend[DATA] = CTRL_REG4_XEN | CTRL_REG4_YEN | CTRL_REG4_ZEN; //accelerometer axis enabled
@@ -134,19 +133,22 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     /*====================== END OF STATE MACHINE CONFIG =====================*/
 
     irqHandler.configureAccInterrupt(); //configure interrupt 1 handler
+    
+}
 
+void Lis3dsh::freeFallDetectionInit() {
+    uint8_t toReceive[1];
+    bool read = false;
     for (;;) {
         
         irqHandler.waitForInt1();
         
         blinkLeds();
         
-        toRead[ADDR] = (0x5F); // OUTS1 register: reading this, the interrupt signal is reset 
-        uint8_t *response = spi.writeAndRead(toRead, read);
-        uint8_t tempResponse = (uint8_t) * response;
+        toReceive[ADDR] = (0x5F); // OUTS1 register: reading this, the interrupt signal is reset 
+        spi.writeAndRead(toReceive, read);
         
     }
-    
 }
 
 // converts time from milliseconds to the corresponding byte

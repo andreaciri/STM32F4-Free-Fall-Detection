@@ -20,5 +20,6 @@ int main()
 {
     
     accelerometer.freeFallConfig(MIN_DURATION, THRESHOLD);
+    accelerometer.freeFallDetectionInit();
 
 }
