@@ -40,26 +40,15 @@ typedef Gpio<GPIOD_BASE, 13> orangeLed;
 typedef Gpio<GPIOD_BASE, 12> greenLed;
 
 void Lis3dsh::blinkLeds() {
-    blueLed::mode(Mode::OUTPUT);
-    redLed::mode(Mode::OUTPUT);
-    orangeLed::mode(Mode::OUTPUT);
-    greenLed::mode(Mode::OUTPUT);
-
-    blueLed::high();
-    redLed::high();
-    orangeLed::high();
-    greenLed::high();
+    blueLed::high(); redLed::high(); orangeLed::high(); greenLed::high();
     usleep(1000000);
-    blueLed::low();
-    redLed::low();
-    orangeLed::low();
-    greenLed::low();
+    blueLed::low(); redLed::low(); orangeLed::low(); greenLed::low();
     usleep(1000000);
 }
 /* ============================ END LEDS UTILITY =============================*/
 
 /**
- * \brief Configures the accelerometer for the free-fall detection.
+ * @brief Configures the accelerometer for the free-fall detection.
  * @param minDuration : The minimum duration (in milliseconds) of subthreshold accelerations for recognize a free-fall condition.
  *                      Allowed range [2,5 - 637,5]ms.
  * @param threshold :   The maximum acceleration (in milli-g) that is recognized as free-fall condition.
@@ -67,6 +56,8 @@ void Lis3dsh::blinkLeds() {
  *                      Allowed range [15,625 - 3984]mg.
  */
 void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
+    blueLed::mode(Mode::OUTPUT); redLed::mode(Mode::OUTPUT);
+    orangeLed::mode(Mode::OUTPUT); greenLed::mode(Mode::OUTPUT);
     bool write = true;
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; //enable GPIOE clock
     int1Signal::mode(Mode::INPUT);
@@ -137,6 +128,9 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     
 }
 
+/**
+ * @brief the function that loops waiting for the freefall detection interrupt
+ */
 void Lis3dsh::freeFallDetectionInit() {
     uint8_t toReceive[1];
     bool read = false;
@@ -148,12 +142,14 @@ void Lis3dsh::freeFallDetectionInit() {
         
         toReceive[ADDR] = OUTS1; // OUTS1 register: reading this, the interrupt signal is reset 
         spi.writeAndRead(toReceive, read);
-        
-    }
-    
+    } 
 }
 
-// converts time from milliseconds to the corresponding byte
+/**
+ * @brief converts time from milliseconds to the corresponding byte
+ * @param milliseconds : the freefall detection time interval expressed in milliseconds
+ * @return byte : the time interval converted in byte
+ */
 uint8_t Lis3dsh::convertTime(float milliseconds){
     // 1 LSB = 1/ODR = 1/400 Hz
     float temp = milliseconds / (2.5);
@@ -166,8 +162,11 @@ uint8_t Lis3dsh::convertTime(float milliseconds){
         return (uint8_t) byte;
 }
 
-// converts acceleration from milli-g to the corresponding byte
-
+/**
+ * @brief converts acceleration from milli-g to the corresponding byte
+ * @param milliG : the threshold expressed in milliG
+ * @return byte : the threshold converted in byte
+ */
 uint8_t Lis3dsh::convertThreshold(float milliG) {
     // 1 LSB = 2g/(2^7)
     float temp = milliG / (15.625);
