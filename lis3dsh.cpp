@@ -40,7 +40,6 @@ void Lis3dsh::blinkLeds() {
     blueLed::high(); redLed::high(); orangeLed::high(); greenLed::high();
     usleep(1000000);
     blueLed::low(); redLed::low(); orangeLed::low(); greenLed::low();
-    usleep(1000000);
 }
 /* ============================ END LEDS UTILITY =============================*/
 
