@@ -156,19 +156,24 @@ uint8_t Lis3dsh::convertTime(float milliseconds){
     // 1 LSB = 1/ODR = 1/400 Hz
     float temp = milliseconds / (2.5);
     int byte = (int) temp;
-    if (byte < 0 || byte > 255)
+    if (byte < 0)
+        return 0;
+    else if (byte > 255)
         return 255;
     else
         return (uint8_t) byte;
 }
 
 // converts acceleration from milli-g to the corresponding byte
-uint8_t Lis3dsh::convertThreshold(float milliG){
+
+uint8_t Lis3dsh::convertThreshold(float milliG) {
     // 1 LSB = 2g/(2^7)
     float temp = milliG / (15.625);
     int byte = (int) temp;
-    if (byte < 0 || byte > 255)
+    if (byte < 0)
         return 0;
+    else if (byte > 255)
+        return 255;
     else
         return (uint8_t) byte;
 }
