@@ -114,17 +114,17 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     /* set NOP (no-operation) in the RESET condition; 
      * also set the NEXT condition (how to go in the next state) : if LLTH2 (the acc 
      * of axis are less than or equal to threshold 2) */
-    toSend[DATA] = 0x0A;
+    toSend[DATA] = (NOP RESET) | (LLTH2 NEXT);
     spi.writeAndRead(toSend, write);
     toSend[ADDR] = ST1_2; //state machine 1, state 2
 
     /* set the RESET condition : if GNTH2 (the acc of axis become greater than threshold 2) ;
      * also set the NEXT condition : TI1 (check if 100 ms passed) */
-    toSend[DATA] = 0x61;
+    toSend[DATA] = (GNTH2 RESET) | (TI1 NEXT);
     spi.writeAndRead(toSend, write);
 
     toSend[ADDR] = ST1_3; //state machine 1, state 3
-    toSend[DATA] = 0x11; //set CONTt (the final state where the freefall condition is verified)
+    toSend[DATA] = CONT; //set CONT (the final state where the freefall condition is verified)
     spi.writeAndRead(toSend, write);
 
     toSend[ADDR] = CTRL_REG1;

@@ -79,6 +79,15 @@
 #define SETT1_THR3_SA       0x40
 #define SETT1_P_DET         0x80
 
+/* bit mask for state machine operation codes */
+#define NEXT                <<0
+#define RESET               <<4
+#define NOP                 0x0
+#define LLTH2               0xA
+#define GNTH2               0x6
+#define TI1                 0x1
+#define CONT                0x11
+
 struct INT_struct
 {
     volatile uint8_t CFG;
