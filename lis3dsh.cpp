@@ -55,8 +55,6 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     blueLed::mode(Mode::OUTPUT); redLed::mode(Mode::OUTPUT);
     orangeLed::mode(Mode::OUTPUT); greenLed::mode(Mode::OUTPUT);
     bool write = true;
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOEEN; //enable GPIOE clock
-    int1Signal::mode(Mode::INPUT);
 
     spi.config();
     
