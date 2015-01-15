@@ -37,9 +37,9 @@ typedef Gpio<GPIOD_BASE, 13> orangeLed;
 typedef Gpio<GPIOD_BASE, 12> greenLed;
 
 void Lis3dsh::blinkLeds() {
-    blueLed::high(); redLed::high(); orangeLed::high(); greenLed::high();
+    blueLed::high(); redLed::high(); orangeLed::high();
     usleep(1000000);
-    blueLed::low(); redLed::low(); orangeLed::low(); greenLed::low();
+    blueLed::low(); redLed::low(); orangeLed::low();
 }
 /* ============================ END LEDS UTILITY =============================*/
 

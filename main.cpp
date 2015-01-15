@@ -16,7 +16,7 @@ void blinkMainLed()
     greenLed::high();
     usleep(1000000);
     greenLed::low();
-    usleep(1000000);
+    usleep(200000);
 }
 /* ============================ END LEDS UTILITY =============================*/
 
