@@ -17,8 +17,6 @@
 
 using namespace miosix;
 
-typedef Gpio<GPIOE_BASE, 0> int1Signal;
-
 /* SPI istance here defined because of integrability (someone interested in the
  freefall detection doesn't have to call the spi.config but only the accelerometer.config */
 Spi spi;
