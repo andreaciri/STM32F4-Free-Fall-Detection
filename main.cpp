@@ -4,9 +4,8 @@
 
 using namespace miosix;
 
-#define MIN_DURATION    100
-#define THRESHOLD       300
-#define PRIORITY_MAX    2
+const float MIN_DURATION = 100;
+const float THRESHOLD = 300;
 
 /* ============================= LEDS UTILITY =============================== */
 typedef Gpio<GPIOD_BASE, 12> greenLed;

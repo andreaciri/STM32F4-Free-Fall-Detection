@@ -11,10 +11,7 @@
 #include <unistd.h>
 
 class Lis3dsh {
-public:
-    Lis3dsh();
-    virtual ~Lis3dsh();
-    
+public:    
     void freeFallConfig(float minDuration, float threshold);
     void freeFallDetectionInit();
     

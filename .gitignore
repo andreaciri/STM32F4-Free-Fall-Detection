@@ -12,6 +12,7 @@ main.map
 miosix_np_2/nbproject/private/private.xml
 .gitignore~
 .gitignore.swp
+Makefile~
 
 # Exclude Mac OS X temporary
 ._*

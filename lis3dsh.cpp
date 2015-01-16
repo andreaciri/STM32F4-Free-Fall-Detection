@@ -22,12 +22,6 @@ using namespace miosix;
 Spi spi;
 IRQhandler irqHandler;
 
-Lis3dsh::Lis3dsh() {
-}
-
-Lis3dsh::~Lis3dsh() {
-}
-
 /* ============================= LEDS UTILITY =============================== */
 typedef Gpio<GPIOD_BASE, 15> blueLed;
 typedef Gpio<GPIOD_BASE, 14> redLed;

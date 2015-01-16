@@ -18,13 +18,6 @@ typedef Gpio<GPIOA_BASE,6> MISO;
 typedef Gpio<GPIOA_BASE,7> MOSI;
 typedef Gpio<GPIOE_BASE,3> CS;
 
-Spi::Spi() {
-}
-
-Spi::~Spi() {
-}
-
-
 /* CS ready */
 void Spi::csOn(){
     CS::low();

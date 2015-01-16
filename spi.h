@@ -9,16 +9,14 @@
 #ifndef SPI_H
 #define	SPI_H
 #define SPI_READ 1<<7
-#define ADDR 0
-#define DATA 1
+
+const short ADDR = 0;
+const short DATA = 1;
 
 enum SpiDirection {READ, WRITE};
 
 class Spi {
-public:
-    Spi();
-    virtual ~Spi();
-    
+public:    
     void config();
     void writeAndRead(uint8_t *dataToSend, SpiDirection direction);
     bool spiBusy();

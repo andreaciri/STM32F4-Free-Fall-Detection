@@ -10,13 +10,9 @@
 #define	IRQHANDLER_H
 
 class IRQhandler {
-public:
-    IRQhandler();
-    virtual ~IRQhandler();
-    
+public:    
     void configureAccInterrupt();
     void waitForInt1();
-
 };
 
 #endif	/* IRQHANDLER_H */

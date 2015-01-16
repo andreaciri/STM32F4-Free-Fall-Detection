@@ -16,12 +16,6 @@ typedef Gpio<GPIOE_BASE, 0> int1Signal;
 
 static Thread *waiting=0;
 
-IRQhandler::IRQhandler() {
-}
-
-IRQhandler::~IRQhandler() {
-}
-
 void __attribute__((naked)) EXTI0_IRQHandler()
 {
     saveContext();
