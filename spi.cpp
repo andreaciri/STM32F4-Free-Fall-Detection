@@ -81,10 +81,10 @@ void Spi::config(){
 /**
  *  @brief performs a write or a read depending on the boolean parameter
  *  @param dataToSend : dataToSend[0] contains the address where to write or where to read,
- *                      dataToSend[1] contains the data to write or it's empty if it's a read.
- *  @return the address where to read the data; if it's a write we ignore it.
+ *                      dataToSend[1] contains the data to write or it will be used to return the byte in case of read.
+ *  @return void
  */
-uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
+void Spi::writeAndRead(uint8_t *dataToSend, bool write){
     while(SPI1->SR & SPI_SR_BSY){};
     
     while((SPI1->SR & SPI_SR_TXE) == 0){};
@@ -99,8 +99,8 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
 
     while((SPI1->SR & SPI_SR_RXNE) == 0){};
     
-    uint8_t *receivedData = (uint8_t*) malloc(sizeof(uint8_t));
-    *receivedData = SPI1->DR; //dummy read
+    uint8_t dummyRead;
+    dummyRead = SPI1->DR; //dummy read
     
     while((SPI1->SR & SPI_SR_TXE) == 0){};
     
@@ -115,7 +115,8 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     
     while((SPI1->SR & SPI_SR_RXNE) == 0){};
     
-    *receivedData = SPI1->DR;
+    dataToSend[DATA] = SPI1->DR;
+    
     
     while ((SPI1->SR & SPI_SR_TXE) == 0){};
     
@@ -123,5 +124,5 @@ uint8_t* Spi::writeAndRead(uint8_t *dataToSend, bool write){
     
     csOff(); //end transmission
     
-    return receivedData;
+    return;
 }

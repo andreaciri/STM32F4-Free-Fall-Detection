@@ -126,7 +126,7 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
  * @brief the main accelerometer function that loops and detects the free fall
  */
 void Lis3dsh::freeFallDetectionInit() {
-    uint8_t toReceive[1];
+    uint8_t toReceive[2];
     bool read = false;
     for (;;) 
     {        

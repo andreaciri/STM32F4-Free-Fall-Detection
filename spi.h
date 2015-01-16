@@ -18,7 +18,7 @@ public:
     virtual ~Spi();
     
     void config();
-    uint8_t *writeAndRead(uint8_t *dataToSend, bool write);
+    void writeAndRead(uint8_t *dataToSend, bool write);
     bool spiBusy();
     
 private:
