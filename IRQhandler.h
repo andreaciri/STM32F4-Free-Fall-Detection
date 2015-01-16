@@ -16,9 +16,6 @@ public:
     
     void configureAccInterrupt();
     void waitForInt1();
-private:
-    void __attribute__((naked)) EXTI0_IRQHandler();
-    void __attribute__((used)) EXTI0HandlerImpl();
 
 };
 
