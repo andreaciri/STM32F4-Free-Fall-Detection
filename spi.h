@@ -12,13 +12,15 @@
 #define ADDR 0
 #define DATA 1
 
+enum SpiDirection {READ, WRITE};
+
 class Spi {
 public:
     Spi();
     virtual ~Spi();
     
     void config();
-    void writeAndRead(uint8_t *dataToSend, bool write);
+    void writeAndRead(uint8_t *dataToSend, SpiDirection direction);
     bool spiBusy();
     
 private:

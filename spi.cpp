@@ -84,14 +84,14 @@ void Spi::config(){
  *                      dataToSend[1] contains the data to write or it will be used to return the byte in case of read.
  *  @return void
  */
-void Spi::writeAndRead(uint8_t *dataToSend, bool write){
+void Spi::writeAndRead(uint8_t *dataToSend, SpiDirection direction){
     while(SPI1->SR & SPI_SR_BSY){};
     
     while((SPI1->SR & SPI_SR_TXE) == 0){};
     
     csOn(); //start transmission
     uint8_t tempDR = dataToSend[ADDR];
-    if(!write) // it's a read
+    if(direction == READ) // it's a read
     {
         tempDR |= SPI_READ;
     }
@@ -104,7 +104,7 @@ void Spi::writeAndRead(uint8_t *dataToSend, bool write){
     
     while((SPI1->SR & SPI_SR_TXE) == 0){};
     
-    if(write) //it is a write
+    if(direction == WRITE) //it is a write
     {
         SPI1->DR = dataToSend[DATA];
     }

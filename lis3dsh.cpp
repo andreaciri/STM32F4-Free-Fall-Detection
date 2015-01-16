@@ -54,7 +54,6 @@ void Lis3dsh::blinkLeds() {
 void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     blueLed::mode(Mode::OUTPUT); redLed::mode(Mode::OUTPUT);
     orangeLed::mode(Mode::OUTPUT); greenLed::mode(Mode::OUTPUT);
-    bool write = true;
 
     spi.config();
     
@@ -66,33 +65,33 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
     toSend[ADDR] = CTRL_REG4;
     toSend[DATA] = CTRL_REG4_XEN | CTRL_REG4_YEN | CTRL_REG4_ZEN; //accelerometer axis enabled
     toSend[DATA] |= CTRL_REG4_ODR0 | CTRL_REG4_ODR1 | CTRL_REG4_ODR2; //output data rate at 400 Hz
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = CTRL_REG3;
     toSend[DATA] = CTRL_REG3_INT1EN; //interrupt1 enabled, signals when freefall is detected
     toSend[DATA] |= CTRL_REG3_IEA; //interrupt signal active high
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = TIM1_1L; //timer 1 for State Machine 1
     toSend[DATA] = timer1; //free fall duration
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = THRS2_1; // threshold 2 for State Machine 1
     toSend[DATA] = threshold2; //free-fall threshold
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = MASK1_B;
     toSend[DATA] = MASK1_B_P_X | MASK1_B_P_Y | MASK1_B_P_Z; //enable positive X, Y and Z in mask B
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = MASK1_A;
     toSend[DATA] = MASK1_A_P_X | MASK1_A_P_Y | MASK1_A_P_Z; //enable positive X, Y and Z in mask A
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = SETT1;
     toSend[DATA] = SETT1_SITR; //STOP and CONT commands generate an interrupt and perform output actions as OUTC command
     toSend[DATA] |= SETT1_R_TAM; //NEXT condition validation : standard mask always evaluated 
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     /* ========================== STATE MACHINE CONFIG =======================*/
     toSend[ADDR] = ST1_1; //state machine 1, state 1
@@ -101,21 +100,21 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
      * also set the NEXT condition (how to go in the next state) : if LLTH2 (the acc 
      * of axis are less than or equal to threshold 2) */
     toSend[DATA] = (NOP RESET) | (LLTH2 NEXT);
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
     toSend[ADDR] = ST1_2; //state machine 1, state 2
 
     /* set the RESET condition : if GNTH2 (the acc of axis become greater than threshold 2) ;
      * also set the NEXT condition : TI1 (check if 100 ms passed) */
     toSend[DATA] = (GNTH2 RESET) | (TI1 NEXT);
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = ST1_3; //state machine 1, state 3
     toSend[DATA] = CONT; //set CONT (the final state where the freefall condition is verified)
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
 
     toSend[ADDR] = CTRL_REG1;
     toSend[DATA] = CTRL_REG1_SM1_EN; //enabled State Machine 1
-    spi.writeAndRead(toSend, write);
+    spi.writeAndRead(toSend, WRITE);
     /*====================== END OF STATE MACHINE CONFIG =====================*/
 
     irqHandler.configureAccInterrupt(); //configure interrupt 1 handler
@@ -127,7 +126,6 @@ void Lis3dsh::freeFallConfig(float minDuration, float threshold) {
  */
 void Lis3dsh::freeFallDetectionInit() {
     uint8_t toReceive[2];
-    bool read = false;
     for (;;) 
     {        
         irqHandler.waitForInt1();
@@ -135,7 +133,7 @@ void Lis3dsh::freeFallDetectionInit() {
         blinkLeds();
         
         toReceive[ADDR] = OUTS1; // OUTS1 register: reading this, the interrupt signal is reset 
-        spi.writeAndRead(toReceive, read);
+        spi.writeAndRead(toReceive, READ);
     } 
 }
 
