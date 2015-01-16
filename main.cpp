@@ -29,6 +29,7 @@ void *freeFallDetection(void *arg)
 {
     miosix::Thread::getCurrentThread()->setPriority(PRIORITY_MAX-1);
     accelerometer.freeFallDetectionInit();
+    return 0;
 }
 
 int main()
