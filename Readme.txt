@@ -1,5 +1,7 @@
+**Free fall detection software**, interrupt based, for **LIS3DSH** accelerometer (**STM32F4-Discovery** board).
 
-Welcome to the Miosix kernel
+ The project run on the **Miosix** kernel (http://miosix.org).
+
 ============================
 
 You can find information on how to configure and use the kernel
