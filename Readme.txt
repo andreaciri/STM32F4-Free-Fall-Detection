@@ -1,6 +1,6 @@
-**Free fall detection software**, interrupt based, for **LIS3DSH** accelerometer (**STM32F4-Discovery** board).
+Free fall detection driver, interrupt based, for LIS3DSH accelerometer (STM32F4-Discovery board).
 
- The project run on the **Miosix** kernel (http://miosix.org).
+ The project run on the Miosix kernel (http://miosix.org).
 
 ============================
 
